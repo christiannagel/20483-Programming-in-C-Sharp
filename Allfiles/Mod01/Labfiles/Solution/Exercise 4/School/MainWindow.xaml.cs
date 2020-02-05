@@ -1,14 +1,12 @@
-﻿using ShoolDatabase;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolDatabase;
 using System;
-using System.Collections;
-using System.ComponentModel;
+using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using Microsoft.EntityFrameworkCore;
 
 namespace School
 {
@@ -18,13 +16,16 @@ namespace School
     public partial class MainWindow : Window
     {
         // Connection to the School database
-        private SchoolContext schoolContext = null;
+        private SchoolContext _schoolContext = null;
 
         // Field for tracking the currently selected teacher
-        private Teacher teacher = null;
+        private Teacher _currentTeacher = null;
 
         // List for tracking the students assigned to the teacher's class
-        private IList studentsInfo = null;
+        // private IList studentsInfo = null;
+
+        private ObservableCollection<Teacher> _teachers;
+        private ObservableCollection<Student> _students;
 
         #region Predefined code
 
@@ -33,26 +34,34 @@ namespace School
             InitializeComponent();
         }
 
+
+
         // Connect to the database and display the list of teachers when the window appears
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.schoolContext = new SchoolContext();
-            this.schoolContext.Teachers.Load();
-            teachersList.DataContext = this.schoolContext.Teachers.Local.ToObservableCollection();
+            this._schoolContext = new SchoolContext();
+            this._schoolContext.Teachers.Load();
+            _teachers = this._schoolContext.Teachers.Local.ToObservableCollection();
+            teachersList.DataContext = _teachers;
+            this._schoolContext.Students.Load();
+            _students = this._schoolContext.Students.Local.ToObservableCollection();
+            studentsList.DataContext = _students;
         }
 
         // When the user selects a different teacher, fetch and display the students for that teacher
         private void teachersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Find the teacher that has been selected
-            this.teacher = teachersList.SelectedItem as Teacher;
-            this.schoolContext.Entry<Teacher>(teacher).Collection(t => t.Students).Load();
+            //// Find the teacher that has been selected
+            this._currentTeacher = teachersList.SelectedItem as Teacher;
+            //this.schoolContext.Entry<Teacher>(teacher).Collection(t => t.Students).Load();
 
-            // Find the students for this teacher
-            this.studentsInfo = teacher.Students.ToList();
+            //// Find the students for this teacher
+            //this.studentsInfo = teacher.Students.ToList();
 
-            // Use databinding to display these students
-            studentsList.DataContext = this.studentsInfo;
+            //// Use databinding to display these students
+            //studentsList.DataContext = this.studentsInfo;
+
+            CollectionViewSource.GetDefaultView(this._students).Filter = student => (student as Student).ClassId == _currentTeacher.Id;
         }
 
         #endregion
@@ -80,7 +89,8 @@ namespace School
                         // When the user closes the form, copy the details back to the student
                         student.FirstName = sf.firstName.Text;
                         student.LastName = sf.lastName.Text;
-                        student.DateOfBirth = DateTime.Parse(sf.dateOfBirth.Text, CultureInfo.InvariantCulture);
+                        // student.DateOfBirth = DateTime.Parse(sf.dateOfBirth.Text, CultureInfo.InvariantCulture);
+                        student.DateOfBirth = DateTime.Parse(sf.dateOfBirth.Text);
 
                         // Enable saving (changes are not made permanent until they are written back to the database)
                         saveChanges.IsEnabled = true;
@@ -94,7 +104,7 @@ namespace School
                     sf = new StudentForm();
 
                     // Set the title of the form to indicate which class the student will be added to (the class for the currently selected teacher)
-                    sf.Title = "New Student for Class " + teacher.Class;
+                    sf.Title = "New Student for Class " + _currentTeacher.Class;
 
                     // Display the form and get the details of the new student
                     if (sf.ShowDialog().Value)
@@ -105,12 +115,12 @@ namespace School
                         newStudent.FirstName = sf.firstName.Text;
                         newStudent.LastName = sf.lastName.Text;
                         newStudent.DateOfBirth = DateTime.Parse(sf.dateOfBirth.Text, CultureInfo.InvariantCulture);
-
+                        newStudent.ClassId = _currentTeacher.Id;
                         // Assign the new student to the current teacher
-                        this.teacher.Students.Add(newStudent);
+                        this._currentTeacher.Students.Add(newStudent);
 
                         // Add the student to the list displayed on the form
-                        this.studentsInfo.Add(newStudent);
+                        this._students.Add(newStudent);
 
                         // Enable saving (changes are not made permanent until they are written back to the database)
                         saveChanges.IsEnabled = true;
@@ -129,7 +139,8 @@ namespace School
                     // If the user clicked Yes, remove the student from the database
                     if (response == MessageBoxResult.Yes)
                     {
-                        this.schoolContext.Students.Remove(student);
+                        this._schoolContext.Students.Local.Remove(student);
+                       
 
                         // Enable saving (changes are not made permanent until they are written back to the database)
                         saveChanges.IsEnabled = true;
@@ -178,7 +189,7 @@ namespace School
             }
             else
             {
-                return "";
+                return string.Empty;
             }
         }
 
