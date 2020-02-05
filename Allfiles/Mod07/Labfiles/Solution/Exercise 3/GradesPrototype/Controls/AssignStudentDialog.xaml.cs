@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GradesPrototype.Services;
-using Grades.DataModel;
-using System.Data.Entity;
 
 namespace GradesPrototype.Controls
 {

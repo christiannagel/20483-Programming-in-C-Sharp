@@ -1,9 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grades.DataModel", "Grades.DataModel\Grades.DataModel.csproj", "{F5251913-F527-40C7-96A8-6C079E9B5897}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grades.DataModel", "Grades.DataModel\Grades.DataModel.csproj", "{F5251913-F527-40C7-96A8-6C079E9B5897}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GradesPrototype", "GradesPrototype\GradesPrototype.csproj", "{8E5FC82F-F511-4FA3-9733-5AC0A4113CEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GradesPrototype", "GradesPrototype\GradesPrototype.csproj", "{8E5FC82F-F511-4FA3-9733-5AC0A4113CEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grades.DataCore", "Grades.DataCore\Grades.DataCore.csproj", "{C950CEFD-3A82-49B7-859E-7C09855313FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreatorProject", "CreatorProject\CreatorProject.csproj", "{CE4720AE-613F-48BE-BA23-CC6D5F92406A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,8 +25,19 @@ Global
 		{8E5FC82F-F511-4FA3-9733-5AC0A4113CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E5FC82F-F511-4FA3-9733-5AC0A4113CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E5FC82F-F511-4FA3-9733-5AC0A4113CEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C950CEFD-3A82-49B7-859E-7C09855313FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C950CEFD-3A82-49B7-859E-7C09855313FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C950CEFD-3A82-49B7-859E-7C09855313FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C950CEFD-3A82-49B7-859E-7C09855313FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE4720AE-613F-48BE-BA23-CC6D5F92406A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE4720AE-613F-48BE-BA23-CC6D5F92406A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE4720AE-613F-48BE-BA23-CC6D5F92406A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE4720AE-613F-48BE-BA23-CC6D5F92406A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D132D121-AB72-439B-BF2C-2A393E5AEE33}
 	EndGlobalSection
 EndGlobal
