@@ -1,4 +1,4 @@
-﻿using ShoolDatabase;
+﻿using SchoolDatabase;
 
 namespace CreateShoolDatabase
 {

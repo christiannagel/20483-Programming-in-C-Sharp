@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ShoolDatabase
+namespace SchoolDatabase
 {
     public class SchoolContext : DbContext
     {

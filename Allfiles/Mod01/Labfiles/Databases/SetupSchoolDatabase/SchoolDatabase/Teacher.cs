@@ -1,18 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace ShoolDatabase
+namespace SchoolDatabase
 {
-    public class Teacher
+    public class Teacher : BindableBase
     {
+        private string _firstName = string.Empty;
+        private string _lastName = string.Empty;
+
         public int Id { get; set; }
-        public string FirstName { get; set; } = string.Empty;
-        public string LastName { get; set; } = string.Empty;
+        public string FirstName 
+        { 
+            get => _firstName; 
+            set => SetProperty(ref _firstName, value); 
+        }
+
+        public string LastName 
+        { 
+            get => _lastName; 
+            set => SetProperty(ref _lastName, value); 
+        }
+
         public string Class { get; set; } = string.Empty;
 
-        public ICollection<Student> Students { get; } = new HashSet<Student>(); 
+        public ICollection<Student> Students { get; } = new HashSet<Student>();
 
     }
 }
