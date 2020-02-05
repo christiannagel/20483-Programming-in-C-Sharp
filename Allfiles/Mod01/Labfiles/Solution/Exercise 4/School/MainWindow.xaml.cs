@@ -1,13 +1,14 @@
-﻿using System;
+﻿using ShoolDatabase;
+using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using School.Data;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace School
 {
@@ -17,7 +18,7 @@ namespace School
     public partial class MainWindow : Window
     {
         // Connection to the School database
-        private SchoolDBEntities schoolContext = null;
+        private SchoolContext schoolContext = null;
 
         // Field for tracking the currently selected teacher
         private Teacher teacher = null;
@@ -35,8 +36,9 @@ namespace School
         // Connect to the database and display the list of teachers when the window appears
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.schoolContext = new SchoolDBEntities();
-            teachersList.DataContext = this.schoolContext.Teachers;
+            this.schoolContext = new SchoolContext();
+            this.schoolContext.Teachers.Load();
+            teachersList.DataContext = this.schoolContext.Teachers.Local.ToObservableCollection();
         }
 
         // When the user selects a different teacher, fetch and display the students for that teacher
@@ -44,10 +46,10 @@ namespace School
         {
             // Find the teacher that has been selected
             this.teacher = teachersList.SelectedItem as Teacher;
-            this.schoolContext.LoadProperty<Teacher>(this.teacher, s => s.Students);
+            this.schoolContext.Entry<Teacher>(teacher).Collection(t => t.Students).Load();
 
             // Find the students for this teacher
-            this.studentsInfo = ((IListSource)teacher.Students).GetList();
+            this.studentsInfo = teacher.Students.ToList();
 
             // Use databinding to display these students
             studentsList.DataContext = this.studentsInfo;
@@ -127,7 +129,7 @@ namespace School
                     // If the user clicked Yes, remove the student from the database
                     if (response == MessageBoxResult.Yes)
                     {
-                        this.schoolContext.Students.DeleteObject(student);
+                        this.schoolContext.Students.Remove(student);
 
                         // Enable saving (changes are not made permanent until they are written back to the database)
                         saveChanges.IsEnabled = true;
