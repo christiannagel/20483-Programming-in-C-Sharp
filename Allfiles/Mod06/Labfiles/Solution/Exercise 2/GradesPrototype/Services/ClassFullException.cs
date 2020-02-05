@@ -13,13 +13,7 @@ namespace GradesPrototype.Services
         // Custom data: the name of the class that is full
         // Code that catches this exception can query the public ClassName property to determine which class caused the exception
         private string _className;
-        public virtual string ClassName
-        {
-            get
-            {
-                return _className;
-            }
-        }
+        public virtual string ClassName => _className;
 
         // Delegate functionality for the common constructors directly to the Exception class
         public ClassFullException()
