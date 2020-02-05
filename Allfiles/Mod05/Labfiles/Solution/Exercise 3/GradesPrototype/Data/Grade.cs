@@ -45,10 +45,7 @@ namespace GradesPrototype.Data
         private string _assessmentDate;
         public string AssessmentDate
         {
-            get
-            {
-                return _assessmentDate;
-            }
+            get => _assessmentDate;
 
             set
             {
@@ -78,10 +75,7 @@ namespace GradesPrototype.Data
         private string _subjectName;
         public string SubjectName
         {
-            get
-            {
-                return _subjectName;
-            }
+            get => _subjectName;
 
             set 
             { 
@@ -102,10 +96,7 @@ namespace GradesPrototype.Data
         private string _assessment;
         public string Assessment
         {
-            get
-            {
-                return _assessment;
-            }
+            get => _assessment;
 
             set
             {
