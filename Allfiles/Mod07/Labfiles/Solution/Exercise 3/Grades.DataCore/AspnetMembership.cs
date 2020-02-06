@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
     public partial class AspnetMembership
     {
@@ -27,7 +27,7 @@ namespace Grades.DataCore
         public DateTime FailedPasswordAnswerAttemptWindowStart { get; set; }
         public string Comment { get; set; }
 
-        public virtual AspnetApplications Application { get; set; }
+        public virtual AspnetApplication Application { get; set; }
         public virtual AspnetUsers User { get; set; }
     }
 }

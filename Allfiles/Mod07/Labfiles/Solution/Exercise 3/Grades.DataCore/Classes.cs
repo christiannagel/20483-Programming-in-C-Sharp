@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace Grades.DataModel
+namespace Grades.Data
 {
     public enum Role { None, Teacher, Student };
 

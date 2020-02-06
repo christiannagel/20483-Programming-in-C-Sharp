@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
     public partial class Role
     {
         public Role()
         {
-            UsersInRoles = new HashSet<UsersInRoles>();
+            UsersInRoles = new HashSet<UserInRole>();
         }
 
         public Guid ApplicationId { get; set; }
@@ -15,7 +15,7 @@ namespace Grades.DataCore
         public string RoleName { get; set; }
         public string Description { get; set; }
 
-        public virtual Applications Application { get; set; }
-        public virtual ICollection<UsersInRoles> UsersInRoles { get; set; }
+        public virtual Application Application { get; set; }
+        public virtual ICollection<UserInRole> UsersInRoles { get; set; }
     }
 }

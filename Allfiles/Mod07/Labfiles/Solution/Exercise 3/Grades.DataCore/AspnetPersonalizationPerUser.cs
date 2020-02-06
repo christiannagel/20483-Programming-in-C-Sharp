@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
     public partial class AspnetPersonalizationPerUser
     {
@@ -11,7 +11,7 @@ namespace Grades.DataCore
         public byte[] PageSettings { get; set; }
         public DateTime LastUpdatedDate { get; set; }
 
-        public virtual AspnetPaths Path { get; set; }
+        public virtual AspnetPath Path { get; set; }
         public virtual AspnetUsers User { get; set; }
     }
 }

@@ -16,6 +16,6 @@
     <Page Remove="Controls\StudentForm.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Grades.DataCore\Grades.DataCore.csproj" />
+    <ProjectReference Include="..\Grades.DataCore\Grades.Data.csproj" />
   </ItemGroup>
 </Project>

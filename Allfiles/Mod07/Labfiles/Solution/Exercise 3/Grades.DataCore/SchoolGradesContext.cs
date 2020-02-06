@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
     public partial class SchoolGradesContext : DbContext
     {
@@ -15,10 +15,10 @@ namespace Grades.DataCore
         {
         }
 
-        public virtual DbSet<Applications> Applications { get; set; }
-        public virtual DbSet<AspnetApplications> AspnetApplications { get; set; }
+        public virtual DbSet<Application> Applications { get; set; }
+        public virtual DbSet<AspnetApplication> AspnetApplications { get; set; }
         public virtual DbSet<AspnetMembership> AspnetMembership { get; set; }
-        public virtual DbSet<AspnetPaths> AspnetPaths { get; set; }
+        public virtual DbSet<AspnetPath> AspnetPaths { get; set; }
         public virtual DbSet<AspnetPersonalizationAllUsers> AspnetPersonalizationAllUsers { get; set; }
         public virtual DbSet<AspnetPersonalizationPerUser> AspnetPersonalizationPerUser { get; set; }
         public virtual DbSet<AspnetProfile> AspnetProfile { get; set; }
@@ -31,13 +31,13 @@ namespace Grades.DataCore
         public virtual DbSet<Memberships> Memberships { get; set; }
         public virtual DbSet<ParentStudent> ParentStudent { get; set; }
         public virtual DbSet<Parent> Parents { get; set; }
-        public virtual DbSet<Profiles> Profiles { get; set; }
+        public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<Teacher> Teachers { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UsersInRoles> UsersInRoles { get; set; }
+        public virtual DbSet<UserInRole> UsersInRoles { get; set; }
         public virtual DbSet<VwAspnetApplications> VwAspnetApplications { get; set; }
         public virtual DbSet<VwAspnetMembershipUsers> VwAspnetMembershipUsers { get; set; }
         public virtual DbSet<VwAspnetProfiles> VwAspnetProfiles { get; set; }
@@ -59,7 +59,7 @@ namespace Grades.DataCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Applications>(entity =>
+            modelBuilder.Entity<Application>(entity =>
             {
                 entity.HasKey(e => e.ApplicationId)
                     .HasName("PK__Applicat__C93A4C9924780CF0");
@@ -73,7 +73,7 @@ namespace Grades.DataCore
                 entity.Property(e => e.Description).HasMaxLength(256);
             });
 
-            modelBuilder.Entity<AspnetApplications>(entity =>
+            modelBuilder.Entity<AspnetApplication>(entity =>
             {
                 entity.HasKey(e => e.ApplicationId)
                     .HasName("PK__aspnet_A__C93A4C9845C85219")
@@ -163,7 +163,7 @@ namespace Grades.DataCore
                     .HasConstraintName("FK__aspnet_Me__UserI__160F4887");
             });
 
-            modelBuilder.Entity<AspnetPaths>(entity =>
+            modelBuilder.Entity<AspnetPath>(entity =>
             {
                 entity.HasKey(e => e.PathId)
                     .HasName("PK__aspnet_P__CD67DC58C8C2C37A")
@@ -545,7 +545,7 @@ namespace Grades.DataCore
                     .HasConstraintName("FK_Parents_diameterUsers");
             });
 
-            modelBuilder.Entity<Profiles>(entity =>
+            modelBuilder.Entity<Profile>(entity =>
             {
                 entity.HasKey(e => e.UserId)
                     .HasName("PK__Profiles__1788CC4CDCE70804");
@@ -568,7 +568,7 @@ namespace Grades.DataCore
 
                 entity.HasOne(d => d.User)
                     .WithOne(p => p.Profiles)
-                    .HasForeignKey<Profiles>(d => d.UserId)
+                    .HasForeignKey<Profile>(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("UserProfile");
             });
@@ -681,7 +681,7 @@ namespace Grades.DataCore
                     .HasConstraintName("UserApplication");
             });
 
-            modelBuilder.Entity<UsersInRoles>(entity =>
+            modelBuilder.Entity<UserInRole>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.RoleId })
                     .HasName("PK__UsersInR__AF2760AD794ACE07");

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
-    public partial class Profiles
+    public partial class Profile
     {
         public Guid UserId { get; set; }
         public string PropertyNames { get; set; }

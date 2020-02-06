@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
-    public partial class AspnetPaths
+    public partial class AspnetPath
     {
-        public AspnetPaths()
+        public AspnetPath()
         {
             AspnetPersonalizationPerUser = new HashSet<AspnetPersonalizationPerUser>();
         }
@@ -15,7 +15,7 @@ namespace Grades.DataCore
         public string Path { get; set; }
         public string LoweredPath { get; set; }
 
-        public virtual AspnetApplications Application { get; set; }
+        public virtual AspnetApplication Application { get; set; }
         public virtual AspnetPersonalizationAllUsers AspnetPersonalizationAllUsers { get; set; }
         public virtual ICollection<AspnetPersonalizationPerUser> AspnetPersonalizationPerUser { get; set; }
     }

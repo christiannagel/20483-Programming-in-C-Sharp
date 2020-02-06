@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
     public partial class AspnetUsers
     {
@@ -19,7 +19,7 @@ namespace Grades.DataCore
         public bool IsAnonymous { get; set; }
         public DateTime LastActivityDate { get; set; }
 
-        public virtual AspnetApplications Application { get; set; }
+        public virtual AspnetApplication Application { get; set; }
         public virtual AspnetMembership AspnetMembership { get; set; }
         public virtual AspnetProfile AspnetProfile { get; set; }
         public virtual ICollection<AspnetPersonalizationPerUser> AspnetPersonalizationPerUser { get; set; }

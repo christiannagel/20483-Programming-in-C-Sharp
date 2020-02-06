@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
-    public partial class Applications
+    public partial class Application
     {
-        public Applications()
+        public Application()
         {
             Memberships = new HashSet<Memberships>();
             Roles = new HashSet<Role>();

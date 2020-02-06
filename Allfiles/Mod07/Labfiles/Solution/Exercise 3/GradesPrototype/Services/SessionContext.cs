@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Grades.DataCore;
-using Grades.DataModel;
 
 
 namespace GradesPrototype.Services
@@ -18,9 +17,9 @@ namespace GradesPrototype.Services
         public static Guid UserID;
         public static string UserName;
        
-        public static Grades.DataModel.Role UserRole;
-        public static Grades.DataModel.Student CurrentStudent;
-        public static Grades.DataModel.Teacher CurrentTeacher;
+        public static Role UserRole;
+        public static Student CurrentStudent;
+        public static Teacher CurrentTeacher;
 
         public static void Save()
         {

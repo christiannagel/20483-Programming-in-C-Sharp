@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
     public partial class Memberships
     {
@@ -25,7 +25,7 @@ namespace Grades.DataCore
         public DateTime FailedPasswordAnswerAttemptWindowsStart { get; set; }
         public string Comment { get; set; }
 
-        public virtual Applications Application { get; set; }
+        public virtual Application Application { get; set; }
         public virtual User User { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Grades.DataCore
+namespace Grades.Data
 {
     public partial class AspnetRoles
     {
@@ -16,7 +16,7 @@ namespace Grades.DataCore
         public string LoweredRoleName { get; set; }
         public string Description { get; set; }
 
-        public virtual AspnetApplications Application { get; set; }
+        public virtual AspnetApplication Application { get; set; }
         public virtual ICollection<AspnetUsersInRoles> AspnetUsersInRoles { get; set; }
     }
 }
