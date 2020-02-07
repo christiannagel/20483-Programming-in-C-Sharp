@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Grades.Data;
 using GradesPrototype.Services;
 
 namespace GradesPrototype.Controls
@@ -29,7 +30,7 @@ namespace GradesPrototype.Controls
         private void Refresh()
         {
             // Find all unassigned students - they have a TeacherID of zero
-            SessionContext.DBContext.Students.Load();
+            // TODO: load needed? SessionContext.DBContext.Students.Load();
             var unassignedStudents = from s in SessionContext.DBContext.Students.Local  
                                      where s.TeacherUserId == null
                                      select s;
@@ -72,7 +73,7 @@ namespace GradesPrototype.Controls
                 Guid studentID = (Guid)studentClicked.Tag;
 
                 // Find this student in the Students collection
-                Grades.DataModel.Student student = (from s in SessionContext.DBContext.Students 
+                Student student = (from s in SessionContext.DBContext.Students 
                                    where s.UserId == studentID
                                    select s).First();
 
@@ -99,7 +100,7 @@ namespace GradesPrototype.Controls
                     Refresh();
                 }
             }
-            catch (Grades.DataModel.ClassFullException cfe)
+            catch (ClassFullException cfe)
             {
                 MessageBox.Show(String.Format("{0}. Class: {1}", cfe.Message, cfe.ClassName), "Error enrolling student", MessageBoxButton.OK, MessageBoxImage.Error);
             }

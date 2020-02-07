@@ -19,8 +19,7 @@ using System.Xml.Linq;
 using Microsoft.Win32;
 using GradesPrototype.Controls;
 using GradesPrototype.Services;
-using Grades.DataModel;
-
+using Grades.Data;
 
 namespace GradesPrototype.Views
 {
@@ -108,7 +107,7 @@ namespace GradesPrototype.Views
                 {
                     // When the user closes the form, retrieve the details of the assessment grade from the form
                     // and use them to create a new Grade object.
-                    Grades.DataModel.Grade newGrade = new Grades.DataModel.Grade();
+                    Grade newGrade = new Grade();
 
                     newGrade.AssessmentDate = gd.assessmentDate.SelectedDate.Value;
                     newGrade.SubjectId = gd.subject.SelectedIndex;
@@ -150,7 +149,7 @@ namespace GradesPrototype.Views
                 if (result.HasValue && result.Value)
                 {
                     // Get the grades for the currently selected student
-                    IEnumerable<Grades.DataModel.Grade> grades = (from g in SessionContext.DBContext.Grades
+                    IEnumerable<Grade> grades = (from g in SessionContext.DBContext.Grades
                                                                   where g.StudentUserId == SessionContext.CurrentStudent.UserId
                                                                   select g);
 
@@ -180,7 +179,7 @@ namespace GradesPrototype.Views
         #region Utility and Helper Methods
 
         // Format the list of grades as an XML document and write it to a MemoryStream
-        private MemoryStream FormatAsXMLStream(IEnumerable<Grades.DataModel.Grade> grades)
+        private MemoryStream FormatAsXMLStream(IEnumerable<Grade> grades)
         {
             // Save the XML document to a MemoryStream by using an XmlWriter
             MemoryStream ms = new MemoryStream();
@@ -193,7 +192,7 @@ namespace GradesPrototype.Views
 
             // Format the grades for the student and add them as child elements of the root node
             // Grade elements have the format <Grade Date="01/01/2012" Subject="Math" Assessment="A-" Comments="Good" />
-            foreach (Grades.DataModel.Grade grade in grades)
+            foreach (Grade grade in grades)
             {
                 writer.WriteStartElement("Grade");
                 writer.WriteAttributeString("Date", grade.AssessmentDate.ToString());
@@ -288,8 +287,8 @@ namespace GradesPrototype.Views
             }
 
             // Find all the grades for the student.
-            List<Grades.DataModel.Grade> grades = new List<Grades.DataModel.Grade>();
-            foreach (Grades.DataModel.Grade grade in SessionContext.DBContext.Grades)
+            List<Grade> grades = new List<Grade>();
+            foreach (Grade grade in SessionContext.DBContext.Grades)
             {
                 if (grade.StudentUserId == SessionContext.CurrentStudent.UserId)
                 {

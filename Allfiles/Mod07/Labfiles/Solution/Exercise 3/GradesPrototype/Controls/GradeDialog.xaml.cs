@@ -11,8 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Grades.Data;
 using GradesPrototype.Services;
-using Grades.DataModel;
 
 namespace GradesPrototype.Controls
 {
@@ -46,7 +46,7 @@ namespace GradesPrototype.Controls
             try
             {
                 // TODO: Exercise 3: Task 2a: Create a Grade object.
-                Grades.DataModel.Grade testGrade = new Grades.DataModel.Grade();
+                Grade testGrade = new Grade();
 
                 // TODO: Exercise 3: Task 2b: Call the ValidateAssessmentDate method.
                 testGrade.ValidateAssessmentDate(assessmentDate.SelectedDate.Value);

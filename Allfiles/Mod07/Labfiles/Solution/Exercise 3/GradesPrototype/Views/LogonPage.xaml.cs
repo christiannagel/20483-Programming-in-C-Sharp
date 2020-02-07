@@ -12,9 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Grades.Data;
 using GradesPrototype.Services;
-using Grades.DataModel;
-
 
 namespace GradesPrototype.Views
 {
@@ -39,7 +38,7 @@ namespace GradesPrototype.Views
         private void Logon_Click(object sender, RoutedEventArgs e)
         {
             // Find the user in the list of possible users - first check whether the user is a Teacher
-            var teacher = (from Grades.DataModel.Teacher t in SessionContext.DBContext.Teachers
+            var teacher = (from Teacher t in SessionContext.DBContext.Teachers
                            where t.User.UserName == username.Text && t.User.UserPassword == password.Password
                            select t).FirstOrDefault();
 
@@ -59,7 +58,7 @@ namespace GradesPrototype.Views
             // If the user is not a teacher, check whether the username and password match those of a student
             else
             {
-                var student = (from Grades.DataModel.Student s in SessionContext.DBContext.Students
+                var student = (from Student s in SessionContext.DBContext.Students
                                where s.User.UserName == username.Text && s.User.UserPassword == password.Password 
                                select s).FirstOrDefault();
 

@@ -11,8 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Grades.Data;
 using GradesPrototype.Services;
-using Grades.DataModel;
 
 
 namespace GradesPrototype.Controls
@@ -31,7 +31,7 @@ namespace GradesPrototype.Controls
         private void ok_Click(object sender, RoutedEventArgs e)
         {
             // Get the details of the current user
-            Grades.DataModel.User currentUser;
+            User currentUser;
             if (SessionContext.UserRole == Role.Teacher)
             {
                 currentUser = SessionContext.CurrentTeacher.User;

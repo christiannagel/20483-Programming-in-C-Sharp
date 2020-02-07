@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using GradesPrototype.Services;
 using GradesPrototype.Controls;
-using Grades.DataModel;
+using Grades.Data;
 
 namespace GradesPrototype.Views
 {
@@ -35,7 +35,7 @@ namespace GradesPrototype.Views
             list.Items.Clear();
 
                 // Find students for the current teacher
-                foreach (Grades.DataModel.Student student in SessionContext.DBContext.Students)
+                foreach (Student student in SessionContext.DBContext.Students)
                 {
                     if (student.TeacherUserId == SessionContext.CurrentTeacher.UserId)
                     {
@@ -65,7 +65,7 @@ namespace GradesPrototype.Views
                 if (StudentSelected != null)
                 {
                     // Find the details of the student by examining the DataContext of the Button
-                    Grades.DataModel.Student student = (Grades.DataModel.Student)itemClicked.DataContext;
+                    Student student = (Student)itemClicked.DataContext;
 
                     // Raise the StudentSelected event (handled by MainWindow) to display the details for this student
                     StudentSelected(sender, new StudentEventArgs(student));
@@ -86,7 +86,7 @@ namespace GradesPrototype.Views
                 {
                     // When the user closes the form, retrieve the details of the student from the form
                     // and use them to create a new Student object
-                    Grades.DataModel.Student newStudent = new Grades.DataModel.Student();
+                    Student newStudent = new Student();
                     newStudent.FirstName = sd.firstName.Text;
                     newStudent.LastName = sd.lastName.Text;
                     newStudent.User = new User();
@@ -105,7 +105,7 @@ namespace GradesPrototype.Views
                     newStudent.ImageName = "No photo";
 
                     // Generate default values for remaining properties of user object
-                    newStudent.User.ApplicationId = (from Grades.DataModel.User u in SessionContext.DBContext.Users select u.ApplicationId).FirstOrDefault();
+                    newStudent.User.ApplicationId = (from User u in SessionContext.DBContext.Users select u.ApplicationId).FirstOrDefault();
                     newStudent.User.IsAnonymous = false;
                     newStudent.User.LastActivityDate = DateTime.Now;
                     newStudent.User.UserId = newStudent.UserId;
@@ -138,9 +138,9 @@ namespace GradesPrototype.Views
     // EventArgs class for passing Student information to an event
     public class StudentEventArgs : EventArgs
     {
-        public Grades.DataModel.Student Child { get; set; }
+        public Student Child { get; set; }
 
-        public StudentEventArgs(Grades.DataModel.Student s)
+        public StudentEventArgs(Student s)
         {
             Child = s;
         }

@@ -13,10 +13,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Grades.Data;
 using GradesPrototype.Controls;
 using GradesPrototype.Services;
 using GradesPrototype.Views;
-using Grades.DataModel;
 
 namespace GradesPrototype
 {
