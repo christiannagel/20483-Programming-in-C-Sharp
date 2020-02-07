@@ -8,7 +8,6 @@ namespace Grades.Data
         public Student()
         {
             Grades = new HashSet<Grade>();
-            ParentStudent = new HashSet<ParentStudent>();
         }
 
         public Guid UserId { get; set; }
@@ -20,6 +19,5 @@ namespace Grades.Data
         public virtual Teacher TeacherUser { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Grade> Grades { get; set; }
-        public virtual ICollection<ParentStudent> ParentStudent { get; set; }
     }
 }
